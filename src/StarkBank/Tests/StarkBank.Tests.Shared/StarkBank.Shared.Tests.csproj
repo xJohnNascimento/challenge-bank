@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -23,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\StarkBank.Infrastructure\StarkBank.Infrastructure.csproj" />
-    <ProjectReference Include="..\Shared\StarkBank.Shared\StarkBank.Shared.csproj" />
+    <ProjectReference Include="..\..\Shared\StarkBank.Shared\StarkBank.Shared.csproj" />
   </ItemGroup>
 
 </Project>
