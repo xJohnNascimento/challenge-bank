@@ -33,7 +33,7 @@ The solution is built using AWS services and consists of several components:
 
 ## AWS Architecture Diagram
 
-![AWS Architecture](./StarkBank.png)
+![AWS Architecture](./docs/StarkBank.png)
 
 ## Setup Instructions
 
