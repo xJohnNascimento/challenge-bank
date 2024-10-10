@@ -28,3 +28,18 @@ variable "allowed_ips" {
 variable "region" {
   default = "sa-east-1"
 }
+
+variable "private_key_name" {
+  default     = "privateKey.pem"
+  description = "Name of the private key file"
+}
+
+variable "starkbank_environment" {
+  default     = "sandbox"
+  description = "Ambiente Starkbank"
+} 
+
+variable "starkbank_project_id" {
+  default     = "6225805994622976"
+  description = "Project ID"
+}

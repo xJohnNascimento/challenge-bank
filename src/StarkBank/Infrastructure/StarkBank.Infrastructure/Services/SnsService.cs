@@ -17,16 +17,8 @@ namespace StarkBank.Infrastructure.Services
                 Message = message
             };
 
-            try
-            {
-                var response = await _snsClient.PublishAsync(publishRequest);
-                return response.MessageId;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error publishing message: {ex.Message}");
-                throw;
-            }
+            var response = await _snsClient.PublishAsync(publishRequest);
+            return response.MessageId;
         }
     }
 }

@@ -42,10 +42,57 @@ The solution is built using AWS services and consists of several components:
 - **AWS Account**
 - **StarkBank Sandbox Account**
 - **Terraform**
+- **.NET 8 SDK**
 
 ### Installation Steps
 
-...
+Follow the steps below to set up and run the project:
+
+1. **Generate Public and Private Keys:**
+   - You will need to generate a public-private key pair to authenticate with StarkBank Sandbox. Use the following commands to generate the keys:
+     https://starkbank.com/faq/how-to-create-ecdsa-keys
+
+2. **Create a StarkBank Sandbox Project:**
+   - Go to the [StarkBank Sandbox](https://sandbox.starkbank.com) and create a new project using the **publicKey.pem** file you just generated.
+   - Once the project is created, copy the **Project ID** that was generated.
+
+3. **Update Terraform Variables:**
+   - In the `variable.tf` file of the project, update the variable `starkbank_project_id` with the Project ID you just copied from the StarkBank Sandbox:
+     ```hcl
+     variable "starkbank_project_id" {
+        default     = "PASTE YOUR PROJECT ID"
+        description = "Project ID"
+        }
+     ```
+
+4. **Update AWS Credentials:**
+   - Open the `~/.aws/credentials` file and add your AWS credentials:
+     ```ini
+     [default]
+     aws_access_key_id = YOUR_ACCESS_KEY
+     aws_secret_access_key = YOUR_SECRET_KEY
+     region = sa-east-1
+     ```
+
+5. **Publish .NET Projects and Compress Files for Deployment:**
+   - Open a terminal or PowerShell and navigate to the root folder of the project.
+   - For each project in the solution (`StarkBank.CreateInvoice`, `StarkBank.InvoiceWebhookReceiver`, and `StarkBank.ProcessInvoicePayment`), run the following command:
+     ```bash
+     dotnet publish -c Release -r linux-x64 --self-contained false -o ./bin/release/publish
+     powershell Compress-Archive -Path ./bin/release/publish/* -DestinationPath ./bin/release/release.zip -force
+     ```
+
+6. **Deploy with Terraform:**
+   - Initialize and apply the Terraform scripts to deploy the AWS resources:
+     ```bash
+     terraform init
+     terraform plan
+     terraform apply
+     ```
+
+7. **Upload the Private Key to S3:**
+    - After the deployment is complete, navigate to the S3 bucket `techchallenge-starkbank` created by Terraform.
+    - Upload the **privateKey.pem** to the bucket for secure access by the application.
 
 ## Running the Application
 

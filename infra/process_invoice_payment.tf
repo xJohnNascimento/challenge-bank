@@ -3,12 +3,16 @@ resource "aws_lambda_function" "lambda_process_invoice_payment" {
   role          = aws_iam_role.lambda_role_process_invoice_payment.arn
   handler       = "StarkBank.ProcessInvoicePayment::StarkBank.ProcessInvoicePayment.Function::FunctionHandler"
   runtime       = "dotnet8"
-  filename         = "./lambda_function_payload.zip"
-  source_code_hash = filebase64sha256("./lambda_function_payload.zip")
+  filename         = "../src/StarkBank/Application/StarkBank.ProcessInvoicePayment/bin/Release/release.zip"
+  source_code_hash = filebase64sha256("../src/StarkBank/Application/StarkBank.ProcessInvoicePayment/bin/Release/release.zip")
+  timeout = 20
   environment {
     variables = {
-      SQS_QUEUE_URL   = aws_sqs_queue.sqs_invoice_payment.url,
-      S3_BUCKET_NAME  = var.s3_bucket_name
+      SQS_QUEUE_URL         = aws_sqs_queue.sqs_invoice_payment.url,
+      S3_BUCKET_NAME        = var.s3_bucket_name,
+      PRIVATE_KEY_NAME      = var.private_key_name,
+      STARKBANK_ENVIRONMENT = var.starkbank_environment,
+      STARKBANK_PROJECT_ID  = var.starkbank_project_id
     }
   }
 }

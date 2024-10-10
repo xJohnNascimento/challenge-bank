@@ -10,7 +10,7 @@
         "S3_BUCKET_NAME": "techchallenge-starkbank",
         "PRIVATE_KEY_NAME": "privateKey.pem",
         "STARKBANK_ENVIRONMENT": "sandbox",
-        "STARKBANK_PROJECT_ID": "4811223602298880"
+        "STARKBANK_PROJECT_ID": "6225805994622976"
       }
     }
   }

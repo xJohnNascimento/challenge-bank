@@ -44,11 +44,19 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
 resource "aws_lambda_function" "lambda_create_invoice" {
   function_name = "lambda-create-invoice"
   role          = aws_iam_role.lambda_role_create_invoice.arn
-  handler       = "StarkBank.CreateInvoice::StarkBank.CreateInvoice.Function::FunctionHandler" # Atualize com o handler correto
+  handler       = "StarkBank.CreateInvoice::StarkBank.CreateInvoice.Function::FunctionHandler"
   runtime       = "dotnet8"
-
-  filename         = "../src/StarkBank/Application/StarkBank.CreateInvoice/bin/Release/net8.0/StarkBank.CreateInvoice.zip"
-  source_code_hash = filebase64sha256("../src/StarkBank/Application/StarkBank.CreateInvoice/bin/Release/net8.0/StarkBank.CreateInvoice.zip")
+  filename         = "../src/StarkBank/Application/StarkBank.CreateInvoice/bin/Release/release.zip"
+  source_code_hash = filebase64sha256("../src/StarkBank/Application/StarkBank.CreateInvoice/bin/Release/release.zip")
+  timeout = 20
+  environment {
+    variables = {
+      S3_BUCKET_NAME        = var.s3_bucket_name,
+      PRIVATE_KEY_NAME      = var.private_key_name,
+      STARKBANK_ENVIRONMENT = var.starkbank_environment,
+      STARKBANK_PROJECT_ID  = var.starkbank_project_id
+    }
+  }
 }
 
 resource "aws_cloudwatch_event_rule" "every_3_hours" {

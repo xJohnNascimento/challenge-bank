@@ -1,6 +1,4 @@
-﻿using StarkBank.Shared.Services;
-
-namespace StarkBank.Tests.Shared.Services
+﻿namespace StarkBank.Tests.Shared.Services
 {
     public class NameServiceTests
     {

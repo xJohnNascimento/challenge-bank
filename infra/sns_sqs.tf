@@ -3,7 +3,15 @@ resource "aws_sns_topic" "sns_invoice_payment" {
 }
 
 resource "aws_sqs_queue" "sqs_invoice_payment" {
-  name = var.sqs_queue_name
+  name                       = var.sqs_queue_name
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.dlq_invoice_payment.arn
+    maxReceiveCount     = 3
+  })
+}
+
+resource "aws_sqs_queue" "dlq_invoice_payment" {
+  name = "${var.sqs_queue_name}-dlq"
 }
 
 resource "aws_sqs_queue_policy" "sqs_queue_invoice_payment_policy" {

@@ -4,7 +4,8 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TOPIC_ARN": "arn:aws:sns:sa-east-1:943457664629:sns-invoice-payment"
       },
       "applicationUrl": "https://localhost:64998;http://localhost:64999"
     },

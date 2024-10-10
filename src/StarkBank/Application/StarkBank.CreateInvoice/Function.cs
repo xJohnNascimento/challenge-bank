@@ -28,13 +28,17 @@ public class Function
     {
         try
         {
-            var randomInvoices = new Random().Next(8, 13);
+            var random = new Random();
+
+            var randomInvoices = random.Next(8, 13);
+            var randomValue = random.Next(200000, 500001);
+
             var invoices = new List<Invoice>();
 
             for (var i = 0; i < randomInvoices; i++)
             {
                 invoices.Add(new Invoice(
-                    amount: 200000 + i * 2,
+                    amount: randomValue,
                     name: NameService.Generate(),
                     taxID: CpfService.Generate()
                 ));
