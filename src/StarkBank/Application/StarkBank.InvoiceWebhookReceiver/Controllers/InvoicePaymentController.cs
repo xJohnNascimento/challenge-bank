@@ -15,7 +15,7 @@ public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, 
         if (string.IsNullOrEmpty(clientIp) && HttpContext.Request.Headers.ContainsKey("X-Forwarded-For"))
         {
             clientIp = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
-            
+
             if (!string.IsNullOrEmpty(clientIp))
             {
                 clientIp = clientIp.Split(',').First().Trim();
@@ -46,7 +46,7 @@ public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, 
             {
                 StatusCode = 200,
                 Body = "{\"message\": \"Webhook processed successfully\"}",
-                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" }}
+                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
             };
         }
         catch (Exception ex)

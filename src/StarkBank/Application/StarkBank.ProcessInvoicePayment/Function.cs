@@ -90,7 +90,7 @@ public class Function
                     new List<Transfer>
                     {
                         new(
-                            amount: webhookEvent.Event.Log.Invoice.Amount,
+                            amount: webhookEvent.Event.Log.Invoice.Amount - webhookEvent.Event.Log.Invoice.Fee ?? 0,
                             bankCode: "20018183",
                             branchCode: "0001",
                             accountNumber: "6341320293482496",
