@@ -22,7 +22,7 @@ public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, 
             }
         }
 
-        logger.LogInformation($"Solicitação recebida do IP: {clientIp}");
+        logger.LogInformation($"Request IP: {clientIp}");
 
         try
         {
