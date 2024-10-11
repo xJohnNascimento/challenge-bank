@@ -23,4 +23,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\StarkBank.Core\StarkBank.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\StarkBank.Infrastructure\StarkBank.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

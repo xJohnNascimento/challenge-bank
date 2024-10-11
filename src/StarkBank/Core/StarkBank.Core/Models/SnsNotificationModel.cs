@@ -1,4 +1,4 @@
-﻿namespace StarkBank.Core.Models
+﻿namespace StarkBank.Domain.Models
 {
     public class SnsNotificationModel
     {

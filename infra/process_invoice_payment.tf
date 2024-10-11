@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "lambda_process_invoice_payment" {
   function_name = "lambda-process-invoice-payment"
   role          = aws_iam_role.lambda_role_process_invoice_payment.arn
-  handler       = "StarkBank.ProcessInvoicePayment::StarkBank.ProcessInvoicePayment.Function::FunctionHandler"
+  handler       = "StarkBank.ProcessInvoicePayment::StarkBank.ProcessInvoicePayment.ProcessInvoicePaymentFunction::FunctionHandler"
   runtime       = "dotnet8"
   filename         = "../src/StarkBank/Application/StarkBank.ProcessInvoicePayment/bin/Release/release.zip"
   source_code_hash = filebase64sha256("../src/StarkBank/Application/StarkBank.ProcessInvoicePayment/bin/Release/release.zip")

@@ -1,4 +1,5 @@
-using StarkBank.Core.Infrastructure;
+using StarkBank.Domain.Interfaces.Infrastructure;
+using StarkBank.Infrastructure.Clients;
 using StarkBank.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 // package will act as the webserver translating request and responses between the Lambda event source and ASP.NET Core.
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
 
+builder.Services.AddSingleton<ISnsClient, SnsClient>();
 builder.Services.AddSingleton<ISnsService, SnsService>();
 
 var app = builder.Build();

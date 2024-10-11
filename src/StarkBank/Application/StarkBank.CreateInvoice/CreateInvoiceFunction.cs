@@ -1,19 +1,22 @@
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.DependencyInjection;
-using StarkBank.Core.Infrastructure;
 using StarkBank.CreateInvoice.DI;
-using StarkBank.Shared.Services;
+using StarkBank.Domain.Interfaces.Application.CreateInvoice;
+using StarkBank.Domain.Interfaces.Infrastructure;
+using StarkBank.Domain.Interfaces.Shared;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
 namespace StarkBank.CreateInvoice;
 
-public class Function
+public class CreateInvoiceFunction
 {
     private readonly IStarkBankAuthenticationService _authentication;
     private readonly IS3Service _s3Service;
+    private readonly IInvoiceService _invoiceService;
+    private readonly IClientGeneratorService _clientGeneratorService;
 
-    public Function()
+    public CreateInvoiceFunction()
     {
         var serviceCollection = new ServiceCollection();
         DependencyInjection.ConfigureServices(serviceCollection);
@@ -22,6 +25,20 @@ public class Function
 
         _authentication = serviceProvider.GetRequiredService<IStarkBankAuthenticationService>();
         _s3Service = serviceProvider.GetRequiredService<IS3Service>();
+        _invoiceService = serviceProvider.GetRequiredService<IInvoiceService>();
+        _clientGeneratorService = serviceProvider.GetRequiredService<IClientGeneratorService>();
+    }
+
+    public CreateInvoiceFunction(
+        IStarkBankAuthenticationService authentication,
+        IS3Service s3Service,
+        IInvoiceService invoiceService,
+        IClientGeneratorService clientGeneratorService)
+    {
+        _authentication = authentication;
+        _s3Service = s3Service;
+        _invoiceService = invoiceService;
+        _clientGeneratorService = clientGeneratorService;
     }
 
     public async Task FunctionHandler(ILambdaContext context)
@@ -39,8 +56,8 @@ public class Function
             {
                 invoices.Add(new Invoice(
                     amount: randomValue,
-                    name: NameService.Generate(),
-                    taxID: CpfService.Generate()
+                    name: _clientGeneratorService.GenerateName(),
+                    taxID: _clientGeneratorService.GenerateCpf()
                 ));
             }
 
@@ -59,9 +76,9 @@ public class Function
             var privateKey = await _s3Service.GetTextFile(bucketName, privateKeyName);
 
             await _authentication.InitializeAsync(privateKey, starkBankEnvironment, starkBankProjectId);
-            var project = _authentication.GetProject();
+            var project = _authentication.GetProject() ?? throw new InvalidOperationException("Project could not be created");
 
-            Invoice.Create(invoices, user: project);
+            var invoicesCreated = _invoiceService.Create(invoices, user: project);
         }
         catch (Exception ex)
         {

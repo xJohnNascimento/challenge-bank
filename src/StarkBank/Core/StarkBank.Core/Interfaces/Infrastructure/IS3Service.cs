@@ -1,4 +1,4 @@
-﻿namespace StarkBank.Core.Infrastructure
+﻿namespace StarkBank.Domain.Interfaces.Infrastructure
 {
     public interface IS3Service
     {

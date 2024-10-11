@@ -8,8 +8,9 @@
   "profile": "John",
   "region": "sa-east-1",
   "configuration": "Release",
+  "function-architecture": "x86_64",
   "function-runtime": "dotnet8",
   "function-memory-size": 512,
   "function-timeout": 30,
-  "function-handler": "StarkBank.ProcessInvoicePayment::StarkBank.ProcessInvoicePayment.ProcessInvoicePaymentFunction::FunctionHandler"
+  "function-handler": "StarkBank.DisableEventRule::StarkBank.DisableEventRule.Function::FunctionHandler"
 }

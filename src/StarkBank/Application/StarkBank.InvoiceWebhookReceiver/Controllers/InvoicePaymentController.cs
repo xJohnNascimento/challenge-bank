@@ -1,11 +1,11 @@
 using Amazon.Lambda.APIGatewayEvents;
 using Microsoft.AspNetCore.Mvc;
-using StarkBank.Core.Infrastructure;
+using StarkBank.Domain.Interfaces.Infrastructure;
 
 namespace StarkBank.InvoiceWebhookReceiver.Controllers;
 
 [ApiController]
-public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, ISnsService snsService, IConfiguration configuration) : ControllerBase
+public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, ISnsService snsService) : ControllerBase
 {
     [HttpPost("webhook")]
     public async Task<APIGatewayProxyResponse> ReceiveWebhook([FromBody] object? payload)
@@ -36,8 +36,7 @@ public class InvoicePaymentController(ILogger<InvoicePaymentController> logger, 
                 };
             }
 
-            var topicArn = configuration["TOPIC_ARN"]
-                           ?? Environment.GetEnvironmentVariable("TOPIC_ARN")
+            var topicArn = Environment.GetEnvironmentVariable("TOPIC_ARN")
                            ?? throw new InvalidOperationException("The environment variable TOPIC_ARN is not set");
 
             await snsService.PublishAsync(topicArn, payload.ToString()!);

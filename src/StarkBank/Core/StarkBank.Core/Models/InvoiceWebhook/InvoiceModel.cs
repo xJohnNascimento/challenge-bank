@@ -1,4 +1,6 @@
-﻿namespace StarkBank.Core.Models.InvoiceWebhook
+﻿using StarkBank.Domain.Models.InvoiceWebhook;
+
+namespace StarkBank.Core.Models.InvoiceWebhook
 {
     public class InvoiceModel
     {
