@@ -65,12 +65,12 @@ resource "aws_api_gateway_rest_api_policy" "api_gateway_policy_attachment" {
     Version   = "2012-10-17",
     Statement = [
       {
-        Effect    = "Deny",
+        Effect    = "Allow",
         Principal = "*",
         Action    = "execute-api:Invoke",
         Resource  = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.api_gateway.id}/*/*/*",
         Condition = {
-          NotIpAddress = {
+          IpAddress = {
             "aws:SourceIp": var.allowed_ips
           }
         }
