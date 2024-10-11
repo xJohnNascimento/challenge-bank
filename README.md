@@ -95,6 +95,10 @@ Follow the steps below to set up and run the project:
     - After the deployment is complete, navigate to the S3 bucket `techchallenge-starkbank` created by Terraform.
     - Upload the **privateKey.pem** to the bucket for secure access by the application.
 
+8. **Update Webhook URL StarkBank:**
+    - After the deployment is complete, navigate to the API GW `api-gateway-invoice` created by Terraform.
+    - Retrieve the URL from the API Gateway and update the webhook settings in StarkBank to ensure proper reception of callback events.
+
 ## Running the Application
 
 Once deployed, the application will:
