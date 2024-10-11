@@ -8,7 +8,7 @@ namespace StarkBank.DisableEventRule;
 
 public class DisableEventRuleFunction
 {
-    public async Task FunctionHandler(string input, ILambdaContext context)
+    public async Task FunctionHandler()
     {
         var cloudWatchEventsClient = new AmazonCloudWatchEventsClient();
         var disableRuleRequest = new DisableRuleRequest

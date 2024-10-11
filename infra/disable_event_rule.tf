@@ -18,7 +18,7 @@ resource "aws_iam_policy" "lambda_disable_event_rule_policy" {
 resource "aws_lambda_function" "lambda_disable_event_rule" {
   function_name = "lambda-disable-event-rule"
   role          = aws_iam_role.lambda_role_create_invoice.arn
-  handler       = "StarkBank.DisableEventRule::StarkBank.DisableEventRule.FunctionHandler"
+  handler       = "StarkBank.DisableEventRule::StarkBank.DisableEventRule.DisableEventRuleFunction::FunctionHandler"
   runtime       = "dotnet8"
   filename         = "../src/StarkBank/Application/StarkBank.DisableEventRule/bin/Release/release.zip"
   source_code_hash = filebase64sha256("../src/StarkBank/Application/StarkBank.DisableEventRule/bin/Release/release.zip")

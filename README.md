@@ -76,12 +76,7 @@ Follow the steps below to set up and run the project:
      Note: The ~/.aws/credentials folder is typically created automatically during the installation and configuration process of the AWS CLI using the aws configure command. If this folder or file does not exist, you can create them manually and add your credentials.
 
 5. **Publish .NET Projects and Compress Files for Deployment:**
-   - Open a terminal or PowerShell and navigate to the root folder of the project.
-   - For each project in the solution (`StarkBank.CreateInvoice`, `StarkBank.InvoiceWebhookReceiver`, and `StarkBank.ProcessInvoicePayment`), run the following command:
-     ```bash
-     dotnet publish -c Release -r linux-x64 --self-contained false -o ./bin/release/publish
-     powershell Compress-Archive -Path ./bin/release/publish/* -DestinationPath ./bin/release/release.zip -force
-     ```
+   - Run the buildall.bat script located in the challenge-bank repository. This script compiles the .NET projects and compresses the files for deployment. It internally calls a PowerShell script named copileandpublish.ps1, which handles the project compilation and generates the ZIP files required for deployment.
 
 6. **Deploy with Terraform:**
    - Initialize and apply the Terraform scripts to deploy the AWS resources:
