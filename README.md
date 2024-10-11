@@ -1,5 +1,8 @@
 # StarkBank Challenge
 
+## Video de explicação do projeto
+[![video do projeto](docs/fundo.png)](https://www.youtube.com/watch?v=SCxJvICxni0)
+
 ## Overview
 
 This project is developed as part of the StarkBank Challenge. The goal is to create an integration that generates invoices every 3 hours, processes invoice payment webhooks, and transfers the received amount (after deducting fees) to the Stark Bank account.
@@ -76,7 +79,7 @@ Follow the steps below to set up and run the project:
      Note: The ~/.aws/credentials folder is typically created automatically during the installation and configuration process of the AWS CLI using the aws configure command. If this folder or file does not exist, you can create them manually and add your credentials.
 
 5. **Publish .NET Projects and Compress Files for Deployment:**
-   - Run the buildall.bat script located in the challenge-bank repository. This script compiles the .NET projects and compresses the files for deployment. It internally calls a PowerShell script named copileandpublish.ps1, which handles the project compilation and generates the ZIP files required for deployment.
+   - Run the buildall.bat script located in the challenge-bank repository. This script compiles the .NET projects and compresses the files for deployment. It internally calls a PowerShell script named copileandpublish.ps1 from the bat file **buildall.bat**, which handles the project compilation and generates the ZIP files required for deployment.
 
 6. **Deploy with Terraform:**
    - Initialize and apply the Terraform scripts to deploy the AWS resources:
