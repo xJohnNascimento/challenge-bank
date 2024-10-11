@@ -12,20 +12,22 @@ if (Test-Path $projectsRootPath) {
         $zipPath = "$projectPath\bin\release\release.zip"
 
         Write-Host "Publicando o projeto em: $projectPath"
+        
+        # Cria a pasta de publicação caso não exista
+        if (-not (Test-Path $publishPath)) {
+            New-Item -ItemType Directory -Force -Path $publishPath
+        }
 
-        # Executa o build e publica o projeto em Release
-        dotnet publish $projectPath -c Release -r linux-x64 --self-contained false -o $publishPath
+        dotnet publish -c Release -r linux-x64 --self-contained false -o $publishPath
 
-        # Verifica se a publicação foi bem-sucedida
         if (Test-Path $publishPath) {
             Write-Host "Comprimindo arquivos para: $zipPath"
             
-            # Remove o arquivo zip anterior, se existir
+            # Remove o arquivo zip anterior, se existir, para garantir que não há conflito
             if (Test-Path $zipPath) {
                 Remove-Item $zipPath -Force
             }
 
-            # Compacta os arquivos publicados
             Compress-Archive -Path "$publishPath\*" -DestinationPath $zipPath -Force
             Write-Host "Arquivo zip criado com sucesso em: $zipPath"
         } else {

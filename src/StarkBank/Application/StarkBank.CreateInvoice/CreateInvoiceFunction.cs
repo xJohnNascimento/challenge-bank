@@ -48,12 +48,11 @@ public class CreateInvoiceFunction
             var random = new Random();
 
             var randomInvoices = random.Next(8, 13);
-            var randomValue = random.Next(200000, 500001);
-
             var invoices = new List<Invoice>();
 
             for (var i = 0; i < randomInvoices; i++)
             {
+                var randomValue = random.Next(200000, 500001);
                 invoices.Add(new Invoice(
                     amount: randomValue,
                     name: _clientGeneratorService.GenerateName(),

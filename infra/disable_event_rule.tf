@@ -26,6 +26,7 @@ resource "aws_lambda_function" "lambda_disable_event_rule" {
   environment {
     variables = {
       EVENT_RULE_NAME = aws_cloudwatch_event_rule.every_3_hours.name
+      THIS_EVENT_RULE_NAME = aws_cloudwatch_event_rule.stop_after_24_hours.name
     }
   }
 }
