@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkBank.Application.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkBank.Infrastructure.Tests", "Tests\StarkBank.Infrastructure.Tests\StarkBank.Infrastructure.Tests.csproj", "{CDE20E2B-4A00-408A-816D-E8A0916BB554}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkBank.DisableEventRule", "StarkBank.DisableEventRule\StarkBank.DisableEventRule.csproj", "{032C7309-E667-4B1F-9024-76AB5E2520D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkBank.DisableEventRule", "Application\StarkBank.DisableEventRule\StarkBank.DisableEventRule.csproj", "{032C7309-E667-4B1F-9024-76AB5E2520D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -73,6 +73,7 @@ Follow the steps below to set up and run the project:
      aws_secret_access_key = YOUR_SECRET_KEY
      region = sa-east-1
      ```
+     Note: The ~/.aws/credentials folder is typically created automatically during the installation and configuration process of the AWS CLI using the aws configure command. If this folder or file does not exist, you can create them manually and add your credentials.
 
 5. **Publish .NET Projects and Compress Files for Deployment:**
    - Open a terminal or PowerShell and navigate to the root folder of the project.
