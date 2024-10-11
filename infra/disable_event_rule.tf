@@ -10,7 +10,7 @@ resource "aws_iam_policy" "lambda_disable_event_rule_policy" {
         "events:DeleteRule"
       ],
       Effect   = "Allow",
-      Resource = aws_cloudwatch_event_rule.every_3_hours.arn
+      Resource = [aws_cloudwatch_event_rule.every_3_hours.arn, aws_cloudwatch_event_rule.stop_after_24_hours.arn]
     }]
   })
 }
@@ -34,7 +34,7 @@ resource "aws_lambda_function" "lambda_disable_event_rule" {
 resource "aws_cloudwatch_event_rule" "stop_after_24_hours" {
   name                = "stop_after_24_hours"
   description         = "Disables the every_3_hours rule after 24 hours"
-  schedule_expression = "rate(24 hours)"
+  schedule_expression = "rate(24 hours)" 
 }
 
 resource "aws_lambda_permission" "allow_eventbridge_for_disable" {
